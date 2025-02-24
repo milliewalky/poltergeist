@@ -1,1 +1,6 @@
+# line encoding
 *.sh text=auto eol=lf
+code/third_party/wasi/** text eol=crlf
+
+# lfs
+code/third_party/wasi/**/* filter=lfs diff=lfs merge=lfs -text
