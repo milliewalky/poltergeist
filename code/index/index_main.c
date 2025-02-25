@@ -1,4 +1,8 @@
 #define function static
+#define global static
+#define read_only __attribute__((section(".rodata")))
+
+#define WASM_Export(name) __attribute__((export_name(#name))) name
 
 function double
 Factorial(unsigned int v)
@@ -51,10 +55,10 @@ TaylorSineHorner(unsigned int power_max, double v)
  return result;
 }
 
-#define Export(name) __attribute__((export_name(#name))) name
+global read_only unsigned int degree = 21;
 
 double
-Export(Sine)(double X)
+WASM_Export(Sine)(double v)
 {
- return TaylorSineHorner(21, X);
+ return TaylorSineHorner(degree, v);
 }
